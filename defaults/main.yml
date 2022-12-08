@@ -1,0 +1,67 @@
+# defaults file for ubuntu-2004-apache-mod-php
+---
+ubuntu_2004_apache_mod_php_apache_install:
+  - apachetop
+
+ubuntu_2004_apache_mod_php_apache_listen:
+  - 80
+
+ubuntu_2004_apache_mod_php_apache_conf_enabled:
+  - security
+
+ubuntu_2004_apache_mod_php_apache_conf_disabled: []
+
+ubuntu_2004_apache_mod_php_apache_server_tokens: Prod
+ubuntu_2004_apache_mod_php_apache_server_signature: 'Off'
+ubuntu_2004_apache_mod_php_apache_trace_enable: 'Off'
+
+ubuntu_2004_apache_mod_php_apache_hidden_directories_pattern: '/\.'
+ubuntu_2004_apache_mod_php_apache_hidden_files_pattern: '^\.'
+
+ubuntu_2004_apache_mod_php_apache_mods_dependencies:
+  mpm_itk:
+    - libapache2-mpm-itk
+  php7.4:
+    - libapache2-mod-php
+    - php
+    - php-common
+
+ubuntu_2004_apache_mod_php_apache_mods_present:
+  - mpm_prefork
+  - rewrite
+  - headers
+  - expires
+  - deflate
+  - status
+  - php7.4
+
+ubuntu_2004_apache_mod_php_apache_mods_absent:
+  - mpm_worker
+  - mpm_event
+
+ubuntu_2004_apache_mod_php_apache_prefork_start_servers: 5
+ubuntu_2004_apache_mod_php_apache_prefork_min_spare_servers: 5
+ubuntu_2004_apache_mod_php_apache_prefork_max_spare_servers: 10
+ubuntu_2004_apache_mod_php_apache_prefork_server_limit: 256
+ubuntu_2004_apache_mod_php_apache_prefork_max_request_workers: 150
+ubuntu_2004_apache_mod_php_apache_prefork_max_connections_per_child: 0
+
+ubuntu_2004_apache_mod_php_apache_vhosts_absent:
+  - name: 000-default.conf
+
+ubuntu_2004_apache_mod_php_php_mods_enabled_defaults:
+  - opcache
+  - json
+  - xml
+  - mysqli
+  - memcache
+  - memcached
+  - msgpack
+  - mbstring
+  - gd
+  - curl
+  - intl
+
+ubuntu_2004_apache_mod_php_php_mods_enabled: "{{ ubuntu_2004_apache_mod_php_php_mods_enabled_defaults }}"
+
+ubuntu_2004_apache_mod_php_php_mods_disabled: []

@@ -1,0 +1,7 @@
+# tasks file for ubuntu-2004-apache-mod-php
+---
+- name: apache | conf | security | update /etc/apache2/conf-available/security.conf
+  template:
+    src: etc/apache2/conf-available/security.conf.j2
+    dest: /etc/apache2/conf-available/security.conf
+  notify: reload apache2

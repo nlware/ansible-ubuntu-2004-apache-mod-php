@@ -1,0 +1,33 @@
+# tasks file for ubuntu-2004-apache-mod-php
+---
+
+- include: apache-install.yml
+
+- include: apache-configuration.yml
+
+- include: apache-conf-security.yml
+
+- include: apache-conf-state.yml
+
+- include: apache-mods-install.yml
+
+- include: apache-mods-prefork.yml
+
+- include: apache-mods-remoteip.yml
+
+- include: apache-mods-state.yml
+
+- include: apache-vhosts.yml
+
+- include: apache-vhosts-state.yml
+
+- include: apache-vhosts-cleanup.yml
+
+- include: php-mods-install.yml
+
+- include: php-mods-state.yml
+
+- name: start and enable service
+  service:
+    name: apache2
+    state: started
