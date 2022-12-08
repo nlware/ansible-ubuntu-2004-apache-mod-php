@@ -30,6 +30,6 @@
 - name: apache | vhosts | create .env file
   template:
     src: "var/www/localdomain/localhost/.env.j2"
-    dest: "{{ item.base_dir.dest }}/.env"
+    dest: "{{ item.base_dir.dest | default('/home/' ~ item.username) }}/.env"
   with_items: "{{ ubuntu_2004_apache_mod_php_apache_vhosts_present | default([]) }}"
   when: item.set_env | default([]) | length > 0
