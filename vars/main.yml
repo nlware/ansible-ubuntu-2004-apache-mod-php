@@ -1,4 +1,4 @@
-# vars file for ubuntu-1804-apache-mod-php
+# vars file for ubuntu-2004-apache-mod-php
 ---
 ubuntu_2004_apache_mod_php_apache_dependencies:
   - apache2
