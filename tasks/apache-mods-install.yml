@@ -1,0 +1,7 @@
+# tasks file for ubuntu-2004-apache-mod-php
+---
+- name: apache | mods | install
+  apt:
+    name: "{{ ubuntu_2004_apache_mod_php_apache_mods_dependencies[item] | default([]) }}"
+  with_items: "{{ ubuntu_2004_apache_mod_php_apache_mods_present }}"
+  notify: reload apache2

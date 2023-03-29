@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+
+<VirtualHost {{ item.listen | default(['127.0.0.1:80']) | join(' ') }}>
+{% if item.server_admin | default(ubuntu_2004_apache_mod_php_apache_default_server_admin) is defined %}
+  ServerAdmin {{ item.server_admin | default(ubuntu_2004_apache_mod_php_apache_default_server_admin) }}
+{% endif %}
+
+  DocumentRoot {{ (item.html_dir | default({})).dest | default(item.base_dir.dest ~ '/public_html') }}
+
+  <Directory {{ (item.html_dir | default({})).dest | default(item.base_dir.dest ~ '/public_html') }}/>
+    Options {{ (item.html_dir | default({})).options | default(['Indexes', 'FollowSymLinks', 'MultiViews']) | join(' ') }}
+    AllowOverride {{ (item.html_dir | default({})).allow_override | default('None') }}
+    Require local granted
+  </Directory>
+
+  LogLevel {{ item.log_level | default('warn') }}
+  ErrorLog {{ (item.log_dir | default({})).dest | default(item.base_dir.dest ~ '/log') }}/error.log
+  CustomLog {{ (item.log_dir | default({})).dest | default(item.base_dir.dest ~ '/log') }}/access.log combined
+</VirtualHost>

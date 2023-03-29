@@ -1,0 +1,38 @@
+# vars file for ubuntu-2004-apache-mod-php
+---
+ubuntu_2004_apache_mod_php_apache_dependencies:
+  - apache2
+
+ubuntu_2004_apache_mod_php_php_mods_dependencies:
+  json:
+    - php7.4-json
+  xml:
+    - php7.4-xml
+  mysql:
+    - php7.4-mysql
+  memcached:
+    - php7.4-memcached
+  memcache:
+    - php7.4-memcache
+  msgpack:
+    - php7.4-msgpack
+  mbstring:
+    - php7.4-mbstring
+  gd:
+    - php7.4-gd
+  curl:
+    - php7.4-curl
+  intl:
+    - php7.4-intl
+  readline:
+    - php7.4-readline
+  soap:
+    - php7.4-soap
+  snmp:
+    - php7.4-snmp
+  opcache:
+    - php7.4-opcache
+  ast:
+    - php-ast
+  gmp:
+    - php7.4-gmp

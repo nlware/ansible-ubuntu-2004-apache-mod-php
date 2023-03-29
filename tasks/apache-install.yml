@@ -1,0 +1,11 @@
+# tasks file for ubuntu-2004-apache-mod-php
+---
+- name: install | dependencies
+  apt:
+    name: "{{ item }}"
+  with_items: "{{ ubuntu_2004_apache_mod_php_apache_dependencies }}"
+
+- name: install | additional
+  apt:
+    name: "{{ item }}"
+  with_items: "{{ ubuntu_2004_apache_mod_php_apache_install }}"

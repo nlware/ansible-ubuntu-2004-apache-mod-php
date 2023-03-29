@@ -1,0 +1,30 @@
+# tasks file for ubuntu-2004-apache-mod-php
+---
+- name: php | mods | touch priorities
+  copy:
+    content: ''
+    dest: "/etc/php/7.4/mods-available/{{ item }}.ini"
+    force: false
+  with_items: "{{ ubuntu_2004_apache_mod_php_php_mods_enabled + ubuntu_2004_apache_mod_php_php_mods_disabled }}"
+
+- name: php | mods | get priorities
+  command: sed -ne "s/^;[ ]\?priority=\([0-9]\+\)$/\\1/p" /etc/php/7.4/mods-available/{{ item }}.ini
+  register: ubuntu_2004_apache_mod_php_php_module_priorities
+  changed_when: false
+  with_items: "{{ ubuntu_2004_apache_mod_php_php_mods_enabled + ubuntu_2004_apache_mod_php_php_mods_disabled }}"
+
+- name: php | mods | disable
+  command: phpdismod -s apache2 {{ item.item }}
+  args:
+    removes: "/etc/php/7.4/apache2/conf.d/{{ item.stdout | default(20, true) }}-{{ item.item }}.ini"
+  with_items: "{{ ubuntu_2004_apache_mod_php_php_module_priorities.results }}"
+  when: item.item in ubuntu_2004_apache_mod_php_php_mods_disabled
+  notify: restart apache2
+
+- name: php | mods | enable
+  command: phpenmod -s apache2 {{ item.item }}
+  args:
+    creates: "/etc/php/7.4/apache2/conf.d/{{ item.stdout | default(20, true) }}-{{ item.item }}.ini"
+  with_items: "{{ ubuntu_2004_apache_mod_php_php_module_priorities.results }}"
+  when: item.item in ubuntu_2004_apache_mod_php_php_mods_enabled
+  notify: restart apache2
