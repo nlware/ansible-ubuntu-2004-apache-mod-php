@@ -4,6 +4,7 @@
   ansible.builtin.copy:
     content: ''
     dest: "/etc/php/7.4/mods-available/{{ item }}.ini"
+    mode: '644'
     force: false
   with_items: "{{ ubuntu_2004_apache_mod_php_php_mods_enabled + ubuntu_2004_apache_mod_php_php_mods_disabled }}"
 
