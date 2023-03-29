@@ -4,6 +4,7 @@
   ansible.builtin.template:
     src: "etc/apache2/sites-available/{{ item.template.file }}"
     dest: "/etc/apache2/sites-available/{{ item.name }}"
+    mode: '644'
   with_items: "{{ ubuntu_2004_apache_mod_php_apache_vhosts_present | default([]) }}"
   notify: reload apache2
 
@@ -31,5 +32,6 @@
   ansible.builtin.template:
     src: "var/www/localdomain/localhost/.env.j2"
     dest: "{{ item.base_dir.dest | default('/home/' ~ item.username) }}/.env"
+    mode: '644'
   with_items: "{{ ubuntu_2004_apache_mod_php_apache_vhosts_present | default([]) }}"
   when: item.set_env | default([]) | length > 0
