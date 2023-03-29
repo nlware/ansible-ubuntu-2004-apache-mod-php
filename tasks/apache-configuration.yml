@@ -1,7 +1,7 @@
 # tasks file for ubuntu-2004-apache-mod-php
 ---
 - name: apache | configuration | update /etc/apache2/ports.conf
-  template:
+  ansible.builtin.template:
     src: etc/apache2/ports.conf.j2
     dest: /etc/apache2/ports.conf
   notify: restart apache2

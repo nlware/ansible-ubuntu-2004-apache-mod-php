@@ -41,6 +41,6 @@
   ansible.builtin.import_tasks: php-mods-state.yml
 
 - name: start and enable service
-  service:
+  ansible.builtin.service:
     name: apache2
     state: started

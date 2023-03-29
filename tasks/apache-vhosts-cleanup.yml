@@ -1,7 +1,7 @@
 # tasks file for ubuntu-2004-apache-mod-php
 ---
 - name: apache | vhosts | cleanup
-  file:
+  ansible.builtin.file:
     state: absent
     path: "/etc/apache2/sites-available/{{ item.name }}"
   with_items: "{{ ubuntu_2004_apache_mod_php_apache_vhosts_absent | default([]) }}"

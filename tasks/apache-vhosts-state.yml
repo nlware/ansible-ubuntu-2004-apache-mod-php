@@ -1,14 +1,14 @@
 # tasks file for ubuntu-2004-apache-mod-php
 ---
 - name: apache | vhosts | disable
-  command: a2dissite {{ item.name }}
+  ansible.builtin.command: a2dissite {{ item.name }}
   args:
     removes: "/etc/apache2/sites-enabled/{{ item.name }}"
   with_items: "{{ ubuntu_2004_apache_mod_php_apache_vhosts_absent | default([]) }}"
   notify: reload apache2
 
 - name: apache | vhosts | enable
-  command: a2ensite {{ item.name }}
+  ansible.builtin.command: a2ensite {{ item.name }}
   args:
     creates: "/etc/apache2/sites-enabled/{{ item.name }}"
   with_items: "{{ ubuntu_2004_apache_mod_php_apache_vhosts_present | default([]) }}"

@@ -1,7 +1,7 @@
 # tasks file for ubuntu-2004-apache-mod-php
 ---
 - name: php | mods | install
-  apt:
+  ansible.builtin.apt:
     name: "{{ ubuntu_2004_apache_mod_php_php_mods_dependencies[item] | default([]) }}"
   with_items: "{{ ubuntu_2004_apache_mod_php_php_mods_enabled }}"
   notify: reload apache2
