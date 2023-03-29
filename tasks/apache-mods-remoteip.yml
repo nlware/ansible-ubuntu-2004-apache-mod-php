@@ -1,7 +1,8 @@
 # tasks file for ubuntu-2004-apache-mod-php
 ---
 - name: apache | mods | remoteip | update /etc/apache2/mods-available/remoteip.conf
-  template:
+  ansible.builtin.template:
     src: etc/apache2/mods-available/remoteip.conf.j2
     dest: /etc/apache2/mods-available/remoteip.conf
+    mode: '644'
   notify: reload apache2

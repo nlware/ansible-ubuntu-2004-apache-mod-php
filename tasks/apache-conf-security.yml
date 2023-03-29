@@ -1,7 +1,8 @@
 # tasks file for ubuntu-2004-apache-mod-php
 ---
 - name: apache | conf | security | update /etc/apache2/conf-available/security.conf
-  template:
+  ansible.builtin.template:
     src: etc/apache2/conf-available/security.conf.j2
     dest: /etc/apache2/conf-available/security.conf
+    mode: '644'
   notify: reload apache2

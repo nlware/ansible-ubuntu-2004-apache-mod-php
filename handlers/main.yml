@@ -1,11 +1,11 @@
 # handlers file for ubuntu-2004-apache-mod-php
 ---
 - name: restart apache2
-  service:
+  ansible.builtin.service:
     name: apache2
     state: restarted
 
 - name: reload apache2
-  service:
+  ansible.builtin.service:
     name: apache2
     state: reloaded
